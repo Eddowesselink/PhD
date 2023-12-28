@@ -3,5 +3,5 @@
 In this repository I will share my PhD codes for supervised and non-supervised machine learning models for the quantification of lumbar paraspinal muscle health using conventional T2-weighted MRI
 
 <p align="center">
-    <img src="https://github.com/Eddowesselink/PhD/blob/main/assets/image_github_readme.jpg" height="300" width="300/>
+    <img src="https://github.com/Eddowesselink/PhD/blob/main/assets/image_github_readme.jpg"/>
 </p>
