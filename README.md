@@ -1,4 +1,4 @@
-<h1 align="center"> Eddo's PhD repository :fireworks: </h1>
+<h1 align="center"> <strong> Eddo's PhD repository</h1>
 
 <p align="center">
   <a href="https://scholar.google.com/citations?user=0aYqoMMAAAAJ&hl=en">
