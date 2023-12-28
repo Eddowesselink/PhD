@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-    <img src="assets/image_github_readme.png" height="120" width="720"/>
+    <img src="assets/image_github_readme.png" height="120" width="520"/>
 </p>
 
 ## Content of repository
