@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-    <img src="https://github.com/Eddowesselink/PhD/blob/main/assets/image_github_readme.png" height="320" width="320"/>
+    <img src="assets/image_github_readme.png" height="120" width="720"/>
 </p>
 
 ## Content of repository
