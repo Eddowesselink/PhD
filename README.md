@@ -19,7 +19,7 @@
     <img src="assets/image_github_readme.png" height="120" width="720"/>
 </p>
 
-## Content of repository
+## <strong> Content of repository
 
 In this repository I will share my PhD codes for supervised and non-supervised machine learning models for the quantification of lumbar paraspinal muscle health using conventional T<sub>2</sub>-weighted MRI. The repository will contain programming codes (Python) for:
 
