@@ -15,8 +15,18 @@
   </a>
 </p>
 
-In this repository I will share my PhD codes for supervised and non-supervised machine learning models for the quantification of lumbar paraspinal muscle health using conventional T2-weighted MRI
-
 <p align="center">
-    <img src="https://github.com/Eddowesselink/PhD/blob/main/assets/image_github_readme.png" height="420" width="420"/>
+    <img src="https://github.com/Eddowesselink/PhD/blob/main/assets/image_github_readme.png" height="320" width="320"/>
 </p>
+
+## Content of repository
+
+In this repository I will share my PhD codes for supervised and non-supervised machine learning models for the quantification of lumbar paraspinal muscle health using conventional T<sub>2</sub>-weighted MRI. The repository will contain programming codes (Python) for:
+
+- Convolutional Neural Networks for the automatic segmentation of the lumbar paraspinal muscles
+  
+  Link to paper: https://www.nature.com/articles/s41598-022-16710-5
+
+- Non-supervised Machine Learning Models for the Quantification of Intramuscular Fat and Muscle Size
+
+  Link to paper: (under review)
