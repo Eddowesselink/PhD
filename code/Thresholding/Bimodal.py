@@ -84,8 +84,7 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
 
     #extract important header information
     sx,sy,sz = img.header['pixdim'][1:4]
-    min_pixdim=np.min(img.header['pixdim'][1:4])
-    ID_name_file = all_images[ii][40:46]
+    ID_name_file = img[40:46]
     ID.append(ii + 1)
     ID_name.append(ID_name_file)
 

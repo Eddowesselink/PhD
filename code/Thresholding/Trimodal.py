@@ -104,9 +104,9 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
       
     #Load image load 
     img = nib.load(all_images[ii])
-    img1 = img.get_fdata()
+    img_array = img.get_fdata()
     sx,sy,sz = img.header['pixdim'][1:4]
-    img1 = np.array(img1)
+    img_array = np.array(img_array)
     ID_full = all_images[ii]
     ID_name_file = ID_full[40:46]
     ID.append(ii + 1)
@@ -116,27 +116,27 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
     #Load mask
     mask = nib.load(all_masks[ii])
     min_pixdim=np.min(mask.header['pixdim'][1:4])
-    mask1 = mask.get_fdata()
-    mask1 = np.array(mask1)
+    mask_array = mask.get_fdata()
+    mask_array = np.array(mask_array)
     ii =  ii + 1
     
-    mask_multifidus1 = mask1 == 1
-    mask_multifidus2 = mask1 == 2
+    mask_multifidus1 = mask_array == 1
+    mask_multifidus2 = mask_array == 2
     mask_multifidus = mask_multifidus1 + mask_multifidus2
     
-    mask_erector1 = mask1 == 3
-    mask_erector2 = mask1 == 4
+    mask_erector1 = mask_array == 3
+    mask_erector2 = mask_array == 4
     
     mask_erector = mask_erector1 + mask_erector2
     
-    mask_psoas1 = mask1 == 5
-    mask_psoas2 = mask1 == 6
+    mask_psoas1 = mask_array == 5
+    mask_psoas2 = mask_array == 6
     mask_psoas = mask_psoas1 + mask_psoas2 
     
     #get all voxels per muscles combined to calculate GMM
-    mask_img_multifidus= img1[mask_multifidus]
-    mask_img_erector = img1[mask_erector]
-    mask_img_psoas = img1[mask_psoas]
+    mask_img_multifidus= img_array[mask_multifidus]
+    mask_img_erector = img_array[mask_erector]
+    mask_img_psoas = img_array[mask_psoas]
     
     B = np.reshape(mask_img_multifidus, (-1, 1))
     D = np.reshape(mask_img_erector, (-1, 1))
@@ -388,7 +388,7 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
     Threshold_psoas_muscle_UD.append(muscle_psoas_upper)
     Threshold_psoas_UD_fat.append(fat_psoas_lower)
 
-    number_of_labels = mask1.max()
+    number_of_labels = mask_array.max()
     labelname_1 = 'Multifidus_right'
     labelname_2 = 'Multifidus_left'
     labelname_3 = 'Erector_spinae_right'
@@ -400,9 +400,9 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
         
         if label == 1:
             print(labelname_1)
-            mask_label = mask1 == label
-            mask_img2 = mask_label * img1
-            mask_img3 = img1[mask_label]
+            mask_label = mask_array == label
+            mask_img2 = mask_label * img_array
+            mask_img3 = img_array[mask_label]
             
             muscle_img_label = mask_img3 <= muscle_multifidus_upper 
             
@@ -440,7 +440,7 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
             mask_muscle = mask_muscle > 0
             mask_muscle = mask_muscle * 10
             
-            muscle_mask_multifidus_right =  mask_muscle.reshape(img1.shape)
+            muscle_mask_multifidus_right =  mask_muscle.reshape(img_array.shape)
             
             mask_undefined = mask_img2 > muscle_multifidus_upper 
             mask_undefined = mask_undefined * mask_label
@@ -449,20 +449,20 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
             mask_undefined = mask_undefined > 0
             mask_undefined = mask_undefined* 50
             
-            undefined_mask_multifidus_right =  mask_undefined.reshape(img1.shape)
+            undefined_mask_multifidus_right =  mask_undefined.reshape(img_array.shape)
               
             fat_img = mask_img2 >= fat_multifidus_lower
             fat_img = fat_img * mask_label
             fat_img = fat_img > 0
             fat_img = fat_img * 100    
             
-            fat_mask_multifidus_right = fat_img.reshape(img1.shape)
+            fat_mask_multifidus_right = fat_img.reshape(img_array.shape)
             
         if label == 2:
             print(labelname_2)
-            mask_label = mask1 == label
-            mask_img2 = mask_label * img1
-            mask_img3 = img1[mask_label]
+            mask_label = mask_array == label
+            mask_img2 = mask_label * img_array
+            mask_img3 = img_array[mask_label]
             
             muscle_img_label = mask_img3 <= muscle_multifidus_upper 
             
@@ -499,7 +499,7 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
             mask_muscle = mask_muscle > 0
             mask_muscle = mask_muscle * 10
             
-            muscle_mask_multifidus_left =  mask_muscle.reshape(img1.shape)
+            muscle_mask_multifidus_left =  mask_muscle.reshape(img_array.shape)
             
             mask_undefined = mask_img2 > muscle_multifidus_upper 
             mask_undefined = mask_undefined * mask_label
@@ -508,20 +508,20 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
             mask_undefined = mask_undefined > 0
             mask_undefined = mask_undefined* 50
             
-            undefined_mask_multifidus_left=  mask_undefined.reshape(img1.shape)
+            undefined_mask_multifidus_left=  mask_undefined.reshape(img_array.shape)
               
             fat_img = mask_img2 >= fat_multifidus_lower
             fat_img = fat_img * mask_label
             fat_img = fat_img > 0
             fat_img = fat_img * 100        
             
-            fat_mask_multifidus_left = fat_img.reshape(img1.shape)
+            fat_mask_multifidus_left = fat_img.reshape(img_array.shape)
             
         if label == 3:
             print(labelname_3)
-            mask_label = mask1 == label
-            mask_img2 = mask_label * img1
-            mask_img3 = img1[mask_label]
+            mask_label = mask_array == label
+            mask_img2 = mask_label * img_array
+            mask_img3 = img_array[mask_label]
             
             muscle_img_label = mask_img3 <= muscle_erector_upper 
             
@@ -556,7 +556,7 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
             mask_muscle = mask_muscle > 0
             mask_muscle = mask_muscle * 10
             
-            muscle_mask_erector_right =  mask_muscle.reshape(img1.shape)
+            muscle_mask_erector_right =  mask_muscle.reshape(img_array.shape)
             
             mask_undefined = mask_img2 > muscle_erector_upper 
             mask_undefined = mask_undefined * mask_label
@@ -565,20 +565,20 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
             mask_undefined = mask_undefined > 0
             mask_undefined = mask_undefined* 50
             
-            undefined_mask_erector_right=  mask_undefined.reshape(img1.shape)
+            undefined_mask_erector_right=  mask_undefined.reshape(img_array.shape)
               
             fat_img = mask_img2 >= fat_erector_lower
             fat_img = fat_img * mask_label
             fat_img = fat_img > 0
             fat_img = fat_img * 100        
             
-            fat_mask_erector_right = fat_img.reshape(img1.shape)
+            fat_mask_erector_right = fat_img.reshape(img_array.shape)
             
         if label == 4:
             print(labelname_4)
-            mask_label = mask1 == label
-            mask_img2 = mask_label * img1
-            mask_img3 = img1[mask_label]
+            mask_label = mask_array == label
+            mask_img2 = mask_label * img_array
+            mask_img3 = img_array[mask_label]
             
             muscle_img_label = mask_img3 <= muscle_erector_upper 
             
@@ -613,7 +613,7 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
             mask_muscle = mask_muscle > 0
             mask_muscle = mask_muscle * 10
             
-            muscle_mask_erector_left =  mask_muscle.reshape(img1.shape)
+            muscle_mask_erector_left =  mask_muscle.reshape(img_array.shape)
             
             mask_undefined = mask_img2 > muscle_erector_upper 
             mask_undefined = mask_undefined * mask_label
@@ -622,21 +622,21 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
             mask_undefined = mask_undefined > 0
             mask_undefined = mask_undefined* 50
             
-            undefined_mask_erector_left=  mask_undefined.reshape(img1.shape)
+            undefined_mask_erector_left=  mask_undefined.reshape(img_array.shape)
               
             fat_img = mask_img2 >= fat_erector_lower
             fat_img = fat_img * mask_label
             fat_img = fat_img > 0
             fat_img = fat_img * 100       
             
-            fat_mask_erector_left = fat_img.reshape(img1.shape)
+            fat_mask_erector_left = fat_img.reshape(img_array.shape)
             
             
         if label == 5:
             print(labelname_5)
-            mask_label = mask1 == label
-            mask_img2 = mask_label * img1
-            mask_img3 = img1[mask_label]
+            mask_label = mask_array == label
+            mask_img2 = mask_label * img_array
+            mask_img3 = img_array[mask_label]
             
             muscle_img_label = mask_img3 <= muscle_psoas_upper 
             
@@ -671,7 +671,7 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
             mask_muscle = mask_muscle > 0
             mask_muscle = mask_muscle * 10
             
-            muscle_mask_psoas_right =  mask_muscle.reshape(img1.shape)
+            muscle_mask_psoas_right =  mask_muscle.reshape(img_array.shape)
             
             mask_undefined = mask_img2 > muscle_psoas_upper 
             mask_undefined = mask_undefined * mask_label
@@ -680,21 +680,21 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
             mask_undefined = mask_undefined > 0
             mask_undefined = mask_undefined* 50
             
-            undefined_mask_psoas_right=  mask_undefined.reshape(img1.shape)
+            undefined_mask_psoas_right=  mask_undefined.reshape(img_array.shape)
               
             fat_img = mask_img2 >= fat_psoas_lower
             fat_img = fat_img * mask_label
             fat_img = fat_img > 0
             fat_img = fat_img * 100       
             
-            fat_mask_psoas_right = fat_img.reshape(img1.shape)
+            fat_mask_psoas_right = fat_img.reshape(img_array.shape)
                         
            
         if label == 6:
             print(labelname_6)
-            mask_label = mask1 == label
-            mask_img2 = mask_label * img1
-            mask_img3 = img1[mask_label]
+            mask_label = mask_array == label
+            mask_img2 = mask_label * img_array
+            mask_img3 = img_array[mask_label]
             
             muscle_img_label = mask_img3 <= muscle_psoas_upper 
             
@@ -729,7 +729,7 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
             mask_muscle = mask_muscle > 0
             mask_muscle = mask_muscle * 10
             
-            muscle_mask_psoas_left =  mask_muscle.reshape(img1.shape)
+            muscle_mask_psoas_left =  mask_muscle.reshape(img_array.shape)
             
             mask_undefined = mask_img2 > muscle_psoas_upper 
             mask_undefined = mask_undefined * mask_label
@@ -738,14 +738,14 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
             mask_undefined = mask_undefined > 0
             mask_undefined = mask_undefined* 50
             
-            undefined_mask_psoas_left =  mask_undefined.reshape(img1.shape)
+            undefined_mask_psoas_left =  mask_undefined.reshape(img_array.shape)
               
             fat_img = mask_img2 >= fat_psoas_lower
             fat_img = fat_img * mask_label
             fat_img = fat_img > 0
             fat_img = fat_img * 100     
             
-            fat_mask_psoas_left = fat_img.reshape(img1.shape)
+            fat_mask_psoas_left = fat_img.reshape(img_array.shape)
             
               
     gt_image_data = muscle_mask_multifidus_right + undefined_mask_multifidus_right + fat_mask_multifidus_right + muscle_mask_multifidus_left + undefined_mask_multifidus_left + fat_mask_multifidus_left + muscle_mask_erector_right + undefined_mask_erector_right +fat_mask_erector_right + muscle_mask_erector_left + undefined_mask_erector_left +fat_mask_erector_left + muscle_mask_psoas_right + undefined_mask_psoas_right +fat_mask_psoas_right+ muscle_mask_psoas_left + undefined_mask_psoas_left+ fat_mask_psoas_left
