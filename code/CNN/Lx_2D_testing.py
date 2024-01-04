@@ -1,56 +1,30 @@
 import os
-import shutil
 import tempfile
 import glob
-import matplotlib.pyplot as plt
-import numpy as np
-from tqdm import tqdm
-
-from monai.losses import DiceCELoss
-from monai.inferers import sliding_window_inference,SliceInferer
-from monai.handlers.utils import from_engine
+from monai.inferers import SliceInferer
 from monai.networks.nets import UNet
-from ignite.engine import Engine
 from monai.transforms import (
     AsDiscreted,
-    AddChanneld,
     Compose,
     Invertd,
     CropForegroundd,
     LoadImaged,
     Orientationd,
-    RandFlipd,
-    RandCropByPosNegLabeld,
-    RandShiftIntensityd,
-    ScaleIntensityRanged,
     Spacingd,
-    RandRotate90d,
-    ToTensord,
-    BatchInverseTransform,
     EnsureTyped,
-    EnsureType,
-    MapTransform,
     NormalizeIntensityd,
     EnsureChannelFirstd,
     SaveImaged,
     FillHolesd,
     KeepLargestConnectedComponentd,
 )
-from monai.config import print_config
-from monai.metrics import DiceMetric
-from monai.networks.nets import UNETR
 from monai.networks.layers import Norm
-from monai.utils import first, set_determinism
-from monai.transforms.utils import allow_missing_keys_mode
-from monai.transforms import Activations, AsChannelFirstd, AsDiscrete, Compose, LoadImaged, SaveImage, ScaleIntensityd, EnsureTyped, EnsureType
+from monai.utils import  set_determinism
 from monai.data import (
     Dataset,
     DataLoader,
-    CacheDataset,
     decollate_batch,
 )
-from monai.data import NiftiSaver
-from monai.transforms import InvertibleTransform
 import torch
 
 #setup data directory
@@ -64,18 +38,14 @@ images = sorted(glob.glob(os.path.join(data_dir, "testing", "*F.nii.gz")))
 test_files = [{"image": img} for img in zip(images)]
 
 spatial_window_size = (256,256,1)
+roi_size = spatial_window_size[0:2]
 spatial_window_batch_size = 4
 batch_size_training = 50
 amount_of_labels = 7
-batch_size_validation = 1
-starting_iteration = 30000
-dice_val_best = 0
-global_step_best = 0
+inference_iteration = 30000
 pix_dim  = (1,1,1)
-max_iterations = 30010
-eval_num = 500
-model_save_best = f'model_UNET_Lumbar_spine_iteration_{starting_iteration}.pth'
-model_continue_training = f'model_UNET_Lumbar_spine_iteration_{starting_iteration}.pth'
+model_save_best = f'model_UNET_Lumbar_spine_iteration_{inference_iteration}.pth'
+model_continue_training = f'model_UNET_Lumbar_spine_iteration_{inference_iteration}.pth'
 learning_rate = 1e-4
 weight_decay= 1e-5
 
@@ -144,6 +114,6 @@ model.eval()
 with torch.no_grad():
     for i, test_data in enumerate(validation_original_loader):
         val_inputs = test_data["image"].to(device)
-        axial_inferer = SliceInferer(roi_size=(256,256), sw_batch_size=spatial_window_batch_size, spatial_dim=2)
+        axial_inferer = SliceInferer(roi_size=roi_size, sw_batch_size=spatial_window_batch_size, spatial_dim=2)
         test_data["pred"] = axial_inferer(val_inputs, model)
         val_data = [post_transforms(i) for i in decollate_batch(test_data)]
