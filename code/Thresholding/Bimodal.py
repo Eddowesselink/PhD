@@ -10,7 +10,6 @@ from sklearn.cluster import KMeans
 import scipy.stats as ss
 import time 
 from sklearn.mixture import GaussianMixture as GMM
-from MuscleMap_codes.py import Thresholding
 
 
 #Here you can easily switch between Kmeans or GMM 
