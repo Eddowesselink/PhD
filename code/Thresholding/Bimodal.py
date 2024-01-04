@@ -10,6 +10,8 @@ from sklearn.cluster import KMeans
 import scipy.stats as ss
 import time 
 from sklearn.mixture import GaussianMixture as GMM
+from MuscleMap_codes.py import Thresholding
+
 
 #Here you can easily switch between Kmeans or GMM 
 kmeans_activate = False
@@ -84,7 +86,7 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
 
     #extract important header information
     sx,sy,sz = img.header['pixdim'][1:4]
-    ID_name_file = img[40:46]
+    ID_name_file = all_images[ii][40:46]
     ID.append(ii + 1)
     ID_name.append(ID_name_file)
 
