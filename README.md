@@ -29,4 +29,4 @@ In this repository I will share my PhD codes for supervised and non-supervised m
 
 - Non-supervised Machine Learning Models for the Quantification of Intramuscular Fat and Muscle Size
 
-  Link to paper:(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10869289/)
+  Link to paper: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10869289/
