@@ -27,6 +27,6 @@ In this repository I will share my PhD codes for supervised and non-supervised m
   
   Link to paper: https://www.nature.com/articles/s41598-022-16710-5
 
-- Non-supervised Machine Learning Models for the Quantification of Intramuscular Fat and Muscle Size
+- Quantifying lumbar paraspinal intramuscular fat: Accuracy and reliability of automated thresholding models
 
   Link to paper: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10869289/
