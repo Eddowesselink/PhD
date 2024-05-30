@@ -47,7 +47,7 @@ You can install all the dependencies by running:
 
 ```bash
 pip install -r requirements.txt
-
+```
 This will install all the required packages listed in the `requirements.txt` file. Make sure you have `pip` installed and configured on your system.
 
 ### Usage
@@ -58,6 +58,6 @@ To use the code, follow these steps:
 
 ```bash
 git clone https://github.com/Eddowesselink/PhD.git
-
+```
 
 
