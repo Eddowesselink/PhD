@@ -59,7 +59,7 @@ To use the code, follow these steps:
 ```bash
 git clone https://github.com/Eddowesselink/PhD.git
 ```
-2. Navigate to the code/Thresholding directory
+2. Navigate to the code/Thresholding directory where you stored the repository
 
 ```bash
 cd PhD/code/Thresholding
@@ -68,3 +68,5 @@ cd PhD/code/Thresholding
 ```bash
 python main_thresholding.py --data_dir /path/to/your/data --kmeans --gmm
 ```
+Replace `/path/to/your/data` with the path to the directory containing your MRI data. You can specify either `--kmeans` or `--gmm` to choose between KMeans or Gaussian Mixture Model clustering for segmentation.
+
