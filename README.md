@@ -59,5 +59,12 @@ To use the code, follow these steps:
 ```bash
 git clone https://github.com/Eddowesselink/PhD.git
 ```
+2. Navigate to the code/Thresholding directory
 
-
+```bash
+cd PhD/code/Thresholding
+```
+3. Run the script main_thresholding.py with the required arguments:
+```bash
+python main_thresholding.py --data_dir /path/to/your/data --kmeans --gmm
+```
