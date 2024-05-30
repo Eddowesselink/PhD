@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-    <img src="assets/image_github_readme.png" height="300" width="600"/>
+    <img src="assets/image_github_readme.png" height="200" width="600"/>
 </p>
 
 ## <strong> Content 
