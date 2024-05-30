@@ -27,6 +27,37 @@ In this repository I will share my PhD codes for supervised and non-supervised m
   
   Link to paper: https://www.nature.com/articles/s41598-022-16710-5
 
-- Quantifying lumbar paraspinal intramuscular fat: Accuracy and reliability of automated thresholding models
+- Quantifying lumbar paraspinal intramuscular fat from clinical MRI 
 
   Link to paper: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10869289/
+
+
+### Prerequisites
+
+Make sure you have the following dependencies installed:
+
+- Python 3.x
+- NumPy
+- Pandas
+- SciPy
+- scikit-learn
+- nibabel
+
+You can install all the dependencies by running:
+
+```bash
+pip install -r requirements.txt
+
+This will install all the required packages listed in the `requirements.txt` file. Make sure you have `pip` installed and configured on your system.
+
+### Usage
+
+To use the code, follow these steps:
+
+1. Clone this repository to your local machine:
+
+```bash
+git clone https://github.com/Eddowesselink/PhD.git
+
+
+
