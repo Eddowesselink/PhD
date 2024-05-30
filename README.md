@@ -50,7 +50,7 @@ pip install -r requirements.txt
 ```
 This will install all the required packages listed in the `requirements.txt` file. Make sure you have `pip` installed and configured on your system.
 
-### Usage
+### Usage 
 
 To use the code, follow these steps:
 
@@ -64,9 +64,18 @@ git clone https://github.com/Eddowesselink/PhD.git
 ```bash
 cd PhD/code/Thresholding
 ```
+
+### Thresholding
 3. Run the script main_thresholding.py with the required arguments:
 ```bash
 python main_thresholding.py --data_dir /path/to/your/data --kmeans --gmm
 ```
 Replace `/path/to/your/data` with the path to the directory containing your MRI data. You can specify either `--kmeans` or `--gmm` to choose between KMeans or Gaussian Mixture Model clustering for segmentation.
 
+### CNN
+Run the script main_CNN.py with the required arguments:
+```bash
+python main_thresholding.py --data_dir /path/to/your/data --model_dir /path/to/your/data
+```
+Replace `/path/to/your/data` in --data_dir with the path to the directory containing your MRI data. 
+Replace `/path/to/your/data` in --model_dir with the path to the directory containing the model_parameters. 
