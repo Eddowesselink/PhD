@@ -85,6 +85,8 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
 
     #extract important header information
     sx,sy,sz = img.header['pixdim'][1:4]
+
+    #Fill in the index for the ID name
     ID_name_file = all_images[ii][40:46]
     ID.append(ii + 1)
     ID_name.append(ID_name_file)
@@ -99,7 +101,7 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
 
     #Update irator
     ii =  ii + 1
-    
+
     #Here, we grab the corresponding labels for each of the muscles. 
     #It is important that the labelling is consistent with the default settings of the MuscleMap Community
     mask_multifidus = (mask_array == 1) | (mask_array == 2)
@@ -167,7 +169,7 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
     fixed_fat_multifidus = mask_fat_multifidus
 
     # Here check if the mean of the muscle array is lower than the fat (this should be), otherwise swap
-    # This controlling mechanism is important because the clustering techniques are not labelling clusters consistently 
+    # This controlling mechanism is important because the clustering techniques are not indexing the clusters consistently 
     if idxmean_multifidus[0] == 2 and idxmean_multifidus[1] == 1: 
         mask_muscle_multifidus = fixed_fat_multifidus
         mask_fat_multifidus = fixed_muscle_multifidus
@@ -260,12 +262,12 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
         
             ##Map the image back and give the value a colour by asigning a value
             mask_img = mask_label * img_array
-            muscle_img = mask_img < muscle_multifidus_upper 
+            muscle_img = mask_img <= muscle_multifidus_upper 
             muscle_img = muscle_img  * mask_label
             muscle_img = muscle_img  * 50
-            muscle_img_multifidus_right =  muscle_img .reshape(img_array.shape)
+            muscle_img_multifidus_right = muscle_img .reshape(img_array.shape)
             
-            fat_img = mask_img >= muscle_multifidus_upper 
+            fat_img = mask_img > muscle_multifidus_upper 
             fat_img = fat_img * mask_label
             fat_img = fat_img * 100        
 
@@ -294,12 +296,12 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
         
             ##Map the image back and give the value a colour by asigning a value
             mask_img = mask_label * img_array
-            muscle_img = mask_img < muscle_multifidus_upper 
+            muscle_img = mask_img <= muscle_multifidus_upper 
             muscle_img = muscle_img  * mask_label
             muscle_img = muscle_img  * 50
             muscle_img_multifidus_left =  muscle_img .reshape(img_array.shape)
             
-            fat_img = mask_img >= muscle_multifidus_upper 
+            fat_img = mask_img > muscle_multifidus_upper 
             fat_img = fat_img * mask_label
             fat_img = fat_img * 100        
 
@@ -328,12 +330,12 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
         
             ##Map the image back and give the value a colour by asigning a value
             mask_img = mask_label * img_array
-            muscle_img = mask_img < muscle_erector_upper 
+            muscle_img = mask_img <= muscle_erector_upper 
             muscle_img = muscle_img  * mask_label
             muscle_img = muscle_img  * 50
             muscle_img_erector_right =  muscle_img .reshape(img_array.shape)
             
-            fat_img = mask_img >= muscle_erector_upper 
+            fat_img = mask_img > muscle_erector_upper 
             fat_img = fat_img * mask_label
             fat_img = fat_img * 100        
 
@@ -362,12 +364,12 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
         
             ##Map the image back and give the value a colour by asigning a value
             mask_img = mask_label * img_array
-            muscle_img = mask_img < muscle_erector_upper 
+            muscle_img = mask_img <= muscle_erector_upper 
             muscle_img = muscle_img  * mask_label
             muscle_img = muscle_img  * 50
             muscle_img_erector_left =  muscle_img .reshape(img_array.shape)
             
-            fat_img = mask_img >= muscle_erector_upper 
+            fat_img = mask_img > muscle_erector_upper 
             fat_img = fat_img * mask_label
             fat_img = fat_img * 100        
 
@@ -396,12 +398,12 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
         
             ##Map the image back and give the value a colour by asigning a value
             mask_img = mask_label * img_array
-            muscle_img = mask_img < muscle_psoas_upper 
+            muscle_img = mask_img <= muscle_psoas_upper 
             muscle_img = muscle_img  * mask_label
             muscle_img = muscle_img  * 50
             muscle_img_psoas_right =  muscle_img .reshape(img_array.shape)
             
-            fat_img = mask_img >= muscle_psoas_upper 
+            fat_img = mask_img > muscle_psoas_upper 
             fat_img = fat_img * mask_label
             fat_img = fat_img * 100        
 
@@ -430,12 +432,12 @@ for y in glob(os.path.join(data_dir,'Training','*T2.nii.gz')):
         
             ##Map the image back and give the value a colour by asigning a value
             mask_img = mask_label * img_array
-            muscle_img = mask_img < muscle_psoas_upper 
+            muscle_img = mask_img <= muscle_psoas_upper 
             muscle_img = muscle_img  * mask_label
             muscle_img = muscle_img  * 50
             muscle_img_psoas_left =  muscle_img .reshape(img_array.shape)
             
-            fat_img = mask_img >= muscle_psoas_upper 
+            fat_img = mask_img > muscle_psoas_upper 
             fat_img = fat_img * mask_label
             fat_img = fat_img * 100        
 
