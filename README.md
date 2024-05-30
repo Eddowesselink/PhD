@@ -64,10 +64,17 @@ git clone https://github.com/Eddowesselink/PhD.git
 ```bash
 cd `/path/to/your/repository`
 ```
+### Thresholding 
 3. Run the script main_thresholding.py with the required arguments:
 ```bash
 python main_thresholding.py --data_dir /path/to/your/data --kmeans --gmm
 ```
 Replace `/path/to/your/data` with the path to the directory containing your MRI data. You can specify either `--kmeans` or `--gmm` to choose between KMeans or Gaussian Mixture Model clustering for segmentation.
 
-dd
+### CNN
+3. Run the script main_CNN.py with the required arguments:
+```bash
+python main_thresholding.py --data_dir /path/to/your/data --model_dir /path/to/your/data 
+```
+Replace `/path/to/your/data` in -- data_dir with the path to the directory containing your MRI data. 
+Replace `/path/to/your/data` in --model_dir with the path to the directory containing the model parameters. 
